@@ -44,5 +44,17 @@ namespace BankAccount.Infrastructure.Repositories
             
             return await query.FirstOrDefaultAsync();
         }
+
+        public async Task AddAsync(T entity)
+        {
+            _dbContext.Set<T>().Add(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

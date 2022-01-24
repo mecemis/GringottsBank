@@ -1,12 +1,7 @@
-using System.IdentityModel.Tokens.Jwt;
-using BankAccount.API.BackgroundServices;
 using BankAccount.Application;
 using BankAccount.Application.Common.Settings;
-using BankAccount.Application.EventStores;
 using BankAccount.Infrastructure;
 using GringottsBank.Shared.Middlewares;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -32,19 +27,8 @@ namespace BankAccount.API
         {
             services.AddHttpContextAccessor();
             services.AddApplicationServices();
-            services.AddEventStore(Configuration);
+            //services.AddEventStore(Configuration);
             services.AddInfrastructureServices(Configuration);
-
-            //var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            //{
-            //    options.Authority = Configuration["IdentityServerUrl"];
-            //    options.Audience = "resource_bankaccount";
-            //    options.RequireHttpsMetadata = false;
-            //});
-            
-            //var identityServerUrl = "https://localhost:6001/";
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
@@ -64,17 +48,13 @@ namespace BankAccount.API
             {
                 opt.Filters.Add(new AuthorizeFilter());
             });
-
-            //services.AddControllers(opt =>
-            //{
-            //    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
-            //});
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankAccount.API", Version = "v1" });
             });
 
-            services.AddHostedService<BankAccountReadModelEventStore>();
+            //services.AddHostedService<BankAccountReadModelEventStore>();
             services.Configure<EventStoreSettings>(Configuration.GetSection("Settings:EventStore"));
         }
 

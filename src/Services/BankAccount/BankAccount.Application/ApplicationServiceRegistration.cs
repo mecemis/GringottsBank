@@ -1,10 +1,8 @@
-﻿using System.Reflection;
-using BankAccount.Application.Common.Behaviors;
-using BankAccount.Application.Common.Settings;
-using BankAccount.Application.EventStores;
+﻿using BankAccount.Application.Common.Behaviors;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BankAccount.Application
 {
@@ -16,7 +14,7 @@ namespace BankAccount.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            services.AddSingleton<BankAccountStream>();
+            //services.AddSingleton<BankAccountStream>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

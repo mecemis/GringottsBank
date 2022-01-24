@@ -33,7 +33,6 @@ namespace GringottsBank.Shared.Middlewares
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            // Log issues and handle exception response
 
             if (exception.GetType() == typeof(ValidationException))
             {
@@ -47,7 +46,7 @@ namespace GringottsBank.Shared.Middlewares
             else
             {
                 var code = HttpStatusCode.InternalServerError;
-                var result = JsonConvert.SerializeObject(new { isSuccess = false, error = exception.Message });
+                var result = JsonConvert.SerializeObject(new { IsSuccessful = false, Error = exception.Message });
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)code;
                 return context.Response.WriteAsync(result);

@@ -19,47 +19,7 @@ services:
     ports:
         - "1436:1433"
 
-  #eventstore.db:
-  #  container_name: eventstore.db
-  #  image: eventstore/eventstore:with-cert-local
-  #  build:
-  #    context: .
-  #    dockerfile: .docker/EventStore/Dockerfile
-  #  ports:
-  #    - "2113:2113"
-  #    - "1113:1113"
-  #    - "1115:1115"
-  #  environment:
-  #    - EVENTSTORE_CERTIFICATE_FILE=eventstore.p12 
-  #    - EVENTSTORE_EXT_SECURE_TCP_PORT=1115 
-  #    - EVENTSTORE_SSL_VALIDATE_SERVER=False
 
-  eventstore.db:
-    container_name: eventstore.db
-    #image: eventstore/eventstore:release-5.0.8
-    image: eventstore/eventstore:with-cert-local
-    build:
-      context: .
-      dockerfile: .docker/EventStore/Dockerfile
-    environment:
-      - EVENTSTORE_CLUSTER_SIZE=1
-      - EVENTSTORE_RUN_PROJECTIONS=All
-      - EVENTSTORE_START_STANDARD_PROJECTIONS=True
-      - EVENTSTORE_DB=/var/lib/eventstore-data
-      - EVENTSTORE_INDEX=/var/lib/eventstore-index
-      - EVENTSTORE_LOG=/var/log/eventstore
-      - EVENTSTORE_EXT_TCP_PORT=1113
-      - EVENTSTORE_EXT_HTTP_PORT=2113
-      - EVENTSTORE_SSL_VALIDATE_SERVER=False
-      - EVENTSTORE_CERTIFICATE_FILE=eventstore.p12
-      - EVENTSTORE_EXT_SECURE_TCP_PORT=1115 
-      #- EVENTSTORE_EXT_SECURE_TCP_PORT=1115
-      #- EVENTSTORE_DISABLE_INTERNAL_TCP_TLS=True
-      #- EVENTSTORE_DISABLE_EXTERNAL_TCP_TLS=True
-    ports:
-      - "1113:1113"
-      - "2113:2113"
-      - "1115:1115"
 
   bankaccount.api:
     container_name: bankaccount.api
@@ -67,12 +27,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:BankAccountDb=Server=bankaccountdb;Database=GringottsBankAccountDb;User Id=sa;Password=Murat123*"
       - IdentityServerUrl=http://gringottsbank.identityserver
-      #- "ConnectionStrings:EventStore=ConnectTo=eventstore.db"
     ports:
       - "8010:80"
     depends_on:
       - bankaccountdb
-      - eventstore.db
 
   gringottsbank.identityserver:
     container_name: gringottsbank.identityserver

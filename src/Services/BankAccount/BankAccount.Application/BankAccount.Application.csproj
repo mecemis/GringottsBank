@@ -6,8 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="BackgroundServices\**" />
+    <Compile Remove="EventStores\**" />
     <EmbeddedResource Remove="BackgroundServices\**" />
+    <EmbeddedResource Remove="EventStores\**" />
     <None Remove="BackgroundServices\**" />
+    <None Remove="EventStores\**" />
   </ItemGroup>
 
   <ItemGroup>

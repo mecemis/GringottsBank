@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GringottsBank.Shared", "src
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FD5C13F2-1B55-427E-96CC-95ADF2767568}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.ApplicationTests", "src\Services\BankAccount\BankAccount.ApplicationTests\BankAccount.ApplicationTests.csproj", "{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Domain.Tests", "src\Services\BankAccount\BankAccount.Domain.Tests\BankAccount.Domain.Tests.csproj", "{407EA701-E82E-4907-954D-54A0ADC9D5A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,14 @@ Global
 		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407EA701-E82E-4907-954D-54A0ADC9D5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407EA701-E82E-4907-954D-54A0ADC9D5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407EA701-E82E-4907-954D-54A0ADC9D5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407EA701-E82E-4907-954D-54A0ADC9D5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +88,8 @@ Global
 		{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1} = {C715703A-0D24-481A-BAEE-E96BAADED154}
 		{5B8E7B08-70BE-4AB0-867B-CF7395B85714} = {F964FFC3-7F98-4BBF-902B-8F50FDD129A1}
 		{73CF947A-81F0-4449-9420-596CB5A789A4} = {5B8E7B08-70BE-4AB0-867B-CF7395B85714}
+		{6E6CE6E0-F8CF-43E7-BFC5-8FB315E6931B} = {C715703A-0D24-481A-BAEE-E96BAADED154}
+		{407EA701-E82E-4907-954D-54A0ADC9D5A9} = {C715703A-0D24-481A-BAEE-E96BAADED154}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A95FEC0-5D2A-4C80-A7ED-77D8BCD6590E}

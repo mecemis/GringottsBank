@@ -6,7 +6,7 @@ using BankAccount.Domain.Exceptions;
 
 namespace BankAccount.Domain.Aggregates.BankAccountAggregate
 {
-    public class BankAccount : EntityBase
+    public class BankAccount : EntityBase, IAggregateRoot
     {
         public Guid CustomerId { get; private set; }
         public ICollection<BankAccountTransaction> BankAccountTransactions { get; private set; }
@@ -21,34 +21,24 @@ namespace BankAccount.Domain.Aggregates.BankAccountAggregate
 
         public void DepositMoney(decimal amount)
         {
-            if (amount <= 0) 
+            if (amount <= 0)
                 throw new InvalidDepositAmountException();
 
             Balance += amount;
 
-            var transaction = new BankAccountTransaction()
-            {
-                Amount = amount,
-                BankAccountId = Id,
-                TransactionType = TransactionType.Deposit
-            };
+            var transaction = new BankAccountTransaction(Id, TransactionType.Deposit, amount);
 
             BankAccountTransactions.Add(transaction);
         }
 
         public void WithdrawMoney(decimal amount)
         {
-            if (amount <= 0 || amount > Balance) 
+            if (amount <= 0 || amount > Balance)
                 throw new InvalidWithdrawAmountException();
 
             Balance -= amount;
 
-            var transaction = new BankAccountTransaction()
-            {
-                Amount = amount,
-                BankAccountId = Id,
-                TransactionType = TransactionType.Withdraw
-            };
+            var transaction = new BankAccountTransaction(Id, TransactionType.Withdraw, amount);
 
             BankAccountTransactions.Add(transaction);
         }

@@ -16,5 +16,8 @@ namespace BankAccount.Application.Common.Interfaces
         Task<T> GetAsync(Expression<Func<T, bool>> predicate,
             string includeString = null,
             bool disableTracking = true);
+
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

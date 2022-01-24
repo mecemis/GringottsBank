@@ -38,8 +38,8 @@ namespace GringottsBank.IdentityServer
             {
                 new Client
                 {
-                    ClientName = "Asp.Net Core MVC",
-                    ClientId = "WebMvcClient",
+                    ClientName = "Gringotts",
+                    ClientId = "GringottsClientFor",
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes =
@@ -51,8 +51,8 @@ namespace GringottsBank.IdentityServer
 
                 new Client
                 {
-                    ClientName = "Asp.Net Core MVC",
-                    ClientId = "WebMvcClientForUser",
+                    ClientName = "Gringotts",
+                    ClientId = "GringottsClientForUser",
                     AllowOfflineAccess = true,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
@@ -68,19 +68,6 @@ namespace GringottsBank.IdentityServer
                     RefreshTokenExpiration = TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime = (int) (DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds,
                     RefreshTokenUsage = TokenUsage.ReUse
-                },
-
-                new Client
-                {
-                    ClientName = "Token Exchange Client",
-                    ClientId = "TokenExchangeClient",
-                    ClientSecrets = {new Secret("secret".Sha256())},
-                    AllowedGrantTypes = new[] {"urn:ietf:params:oauth:grant-type:token-exchange"},
-                    AllowedScopes =
-                    {
-                        "bankaccount_fullpermission", "payment_fullpermission",
-                        IdentityServerConstants.StandardScopes.OpenId
-                    }
                 },
                 
             };
