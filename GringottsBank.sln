@@ -13,13 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GringottsBank.IdentityServe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BankAccount", "BankAccount", "{C715703A-0D24-481A-BAEE-E96BAADED154}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Application", "src\Services\BankAccount\BankAccount.Application\BankAccount.Application.csproj", "{19155EB5-A18B-400E-B63A-A3DEA3239368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.Application", "src\Services\BankAccount\BankAccount.Application\BankAccount.Application.csproj", "{19155EB5-A18B-400E-B63A-A3DEA3239368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Domain", "src\Services\BankAccount\BankAccount.Domain\BankAccount.Domain.csproj", "{C78D8D18-2167-46BE-8700-A19AF1B08EBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.Domain", "src\Services\BankAccount\BankAccount.Domain\BankAccount.Domain.csproj", "{C78D8D18-2167-46BE-8700-A19AF1B08EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Infrastructure", "src\Services\BankAccount\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj", "{DE832BA0-41F1-4662-9B0E-9D1C52A15361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.Infrastructure", "src\Services\BankAccount\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj", "{DE832BA0-41F1-4662-9B0E-9D1C52A15361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.API", "src\Services\BankAccount\BankAccount.API\BankAccount.API.csproj", "{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.API", "src\Services\BankAccount\BankAccount.API\BankAccount.API.csproj", "{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5B8E7B08-70BE-4AB0-867B-CF7395B85714}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GringottsBank.Shared", "src\Shared\GringottsBank.Shared\GringottsBank.Shared.csproj", "{73CF947A-81F0-4449-9420-596CB5A789A4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FD5C13F2-1B55-427E-96CC-95ADF2767568}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,14 @@ Global
 		{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73CF947A-81F0-4449-9420-596CB5A789A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73CF947A-81F0-4449-9420-596CB5A789A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73CF947A-81F0-4449-9420-596CB5A789A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73CF947A-81F0-4449-9420-596CB5A789A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5C13F2-1B55-427E-96CC-95ADF2767568}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +74,8 @@ Global
 		{C78D8D18-2167-46BE-8700-A19AF1B08EBF} = {C715703A-0D24-481A-BAEE-E96BAADED154}
 		{DE832BA0-41F1-4662-9B0E-9D1C52A15361} = {C715703A-0D24-481A-BAEE-E96BAADED154}
 		{C96C1589-FAB6-4B3E-95D4-93CBEB723CC1} = {C715703A-0D24-481A-BAEE-E96BAADED154}
+		{5B8E7B08-70BE-4AB0-867B-CF7395B85714} = {F964FFC3-7F98-4BBF-902B-8F50FDD129A1}
+		{73CF947A-81F0-4449-9420-596CB5A789A4} = {5B8E7B08-70BE-4AB0-867B-CF7395B85714}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A95FEC0-5D2A-4C80-A7ED-77D8BCD6590E}

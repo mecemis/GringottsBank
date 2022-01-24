@@ -1,8 +1,19 @@
+using System.IdentityModel.Tokens.Jwt;
+using BankAccount.API.BackgroundServices;
+using BankAccount.Application;
+using BankAccount.Application.Common.Settings;
+using BankAccount.Application.EventStores;
+using BankAccount.Infrastructure;
+using GringottsBank.Shared.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace BankAccount.API
@@ -19,12 +30,52 @@ namespace BankAccount.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddApplicationServices();
+            services.AddEventStore(Configuration);
+            services.AddInfrastructureServices(Configuration);
 
-            services.AddControllers();
+            //var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            //{
+            //    options.Authority = Configuration["IdentityServerUrl"];
+            //    options.Audience = "resource_bankaccount";
+            //    options.RequireHttpsMetadata = false;
+            //});
+            
+            //var identityServerUrl = "https://localhost:6001/";
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = Configuration["IdentityServerUrl"];
+                    options.Audience = "resource_bankaccount";
+                    options.RequireHttpsMetadata = false;
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false
+                    };
+                });
+
+            services.AddControllers(opt =>
+            {
+                opt.Filters.Add(new AuthorizeFilter());
+            });
+
+            //services.AddControllers(opt =>
+            //{
+            //    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+            //});
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankAccount.API", Version = "v1" });
             });
+
+            services.AddHostedService<BankAccountReadModelEventStore>();
+            services.Configure<EventStoreSettings>(Configuration.GetSection("Settings:EventStore"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,9 +88,15 @@ namespace BankAccount.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankAccount.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseCustomerMiddleware();
+
+            app.UseExceptionMiddleware();
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

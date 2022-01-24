@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BankAccount.Application.Features.BankAccounts.Commands.CreateBankAccount;
+using BankAccount.Application.Features.BankAccounts.Queries.GetAccountDetail;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using BankAccount.Application.Features.BankAccounts.Commands.CreateBankAccount;
-using MediatR;
+using BankAccount.Application.Features.BankAccounts.Queries.GetAccountDetailsByDate;
+using BankAccount.Application.Features.BankAccounts.Queries.GetCustomerAccountList;
+using GringottsBank.Shared.ControllerBases;
 
 namespace BankAccount.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BankAccountsController : ControllerBase
+    public class BankAccountsController : CustomBaseController
     {
         private readonly IMediator _mediator;
 
@@ -21,12 +21,32 @@ namespace BankAccount.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost(Name = "create-bank-account")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> CreateBankAccount([FromBody] CreateBankAccountCommand command)
+        [HttpPost("create-bank-account")]
+        public async Task<IActionResult> CreateBankAccount([FromBody] CreateBankAccountCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return CreateActionResult(result);
+        }
+
+        [HttpGet("get-customer-account-details")]
+        public async Task<IActionResult> GetAccountDetails([FromQuery] GetAccountDetailsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return CreateActionResult(result);
+        }
+
+        [HttpGet("get-customer-account-details-by-date")]
+        public async Task<IActionResult> GetAccountDetailsByDate([FromQuery] GetAccountDetailsByDateQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return CreateActionResult(result);
+        }
+
+        [HttpGet("get-customer-account-list")]
+        public async Task<IActionResult> GetAccountList([FromQuery] GetCustomerAccountListQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return CreateActionResult(result);
         }
     }
 }

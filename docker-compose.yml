@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  identitydb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+
+  bankaccountdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+
+  bankaccount.api:
+    image: ${DOCKER_REGISTRY-}bankaccountapi
+    build:
+      context: .
+      dockerfile: src/Services/BankAccount/BankAccount.API/Dockerfile
+
+  gringottsbank.identityserver:
+    image: ${DOCKER_REGISTRY-}gringottsbankidentityserver
+    build:
+      context: .
+      dockerfile: src/Identity/GringottsBank.IdentityServer/Dockerfile
+
+
+
+

@@ -11,6 +11,11 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using GringottsBank.IdentityServer.Data;
+using GringottsBank.IdentityServer.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GringottsBank.IdentityServer
 {
@@ -37,23 +42,49 @@ namespace GringottsBank.IdentityServer
 
             try
             {
-                var seed = args.Contains("/seed");
-                if (seed)
-                {
-                    args = args.Except(new[] { "/seed" }).ToArray();
-                }
 
                 var host = CreateHostBuilder(args).Build();
 
-                if (seed)
-                {
+                //using (var scope = host.Services.CreateScope())
+                //{
+                //    var serviceProvider = scope.ServiceProvider;
+
+                //    var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+                //    applicationDbContext.Database.Migrate();
+
+                //    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                //    if (!userManager.Users.Any())
+                //    {
+                //        ApplicationUser user = new ApplicationUser
+                //            {UserName = "DobbyTheGreat", Email = "dobby@gringottsbank.com", FirstName = "Dobby"};
+                //        var result = await userManager.CreateAsync(user, "Dobby28*");
+
+                //        if (result.Succeeded)
+                //        {
+                //            await userManager.AddToRoleAsync(user, "free-elf");
+                //        }
+                //    }
+                //}
+
+                //var seed = args.Contains("/seed");
+                //if (seed)
+                //{
+                //    args = args.Except(new[] { "/seed" }).ToArray();
+                //}
+
+                //var host = CreateHostBuilder(args).Build();
+
+                //if (seed)
+                //{
                     Log.Information("Seeding database...");
                     var config = host.Services.GetRequiredService<IConfiguration>();
                     var connectionString = config.GetConnectionString("DefaultConnection");
                     SeedData.EnsureSeedData(connectionString);
                     Log.Information("Done seeding database.");
-                    return 0;
-                }
+                    //return 0;
+                //}
 
                 Log.Information("Starting host...");
                 host.Run();

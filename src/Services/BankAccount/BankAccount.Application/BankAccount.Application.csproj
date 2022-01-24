@@ -5,16 +5,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BankAccounts\Commands\CreateBankAccount\" />
+    <Compile Remove="BackgroundServices\**" />
+    <EmbeddedResource Remove="BackgroundServices\**" />
+    <None Remove="BackgroundServices\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\BankAccounts\Commands\CreateBankAccount\" />
+    <Folder Include="Features\BankAccounts\Commands\DepositMoney\" />
+    <Folder Include="Features\BankAccounts\Queries\GetAccountDetailsByDate\" />
+    <Folder Include="Common\Mappings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="EventStore.Client" Version="21.2.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\GringottsBank.Shared\GringottsBank.Shared.csproj" />
+    <ProjectReference Include="..\BankAccount.Domain\BankAccount.Domain.csproj" />
   </ItemGroup>
 
 </Project>
