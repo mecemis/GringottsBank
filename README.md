@@ -14,7 +14,7 @@ This will contain all entities, enums, exceptions, interfaces, types and logic s
 
 ### Application
 
-This layer contains all application logic. It is dependent on the domain layer, but has no dependencies on any other layer or project. This layer defines interfaces that are implemented by outside layers. 
+This layer contains all application logic. It is dependent on the domain layer, but has no dependencies on any other layer or project. This layer defines interfaces that are implemented by outside layers. Mediatr CQRS and DDD approaches are used.
 
 ### Infrastructure
 
