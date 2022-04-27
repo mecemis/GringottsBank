@@ -10,18 +10,18 @@ namespace BankAccount.Application.EventStores
     {
         public static void AddEventStore(this IServiceCollection services, IConfiguration configuration)
         {
-            //var connectionSettings = ConnectionSettings.Create();
-            //connectionSettings.EnableVerboseLogging()
-            //    .UseDebugLogger()
-            //    .UseConsoleLogger()
-            //    .SetHeartbeatTimeout(TimeSpan.FromSeconds(60))
-            //    .SetHeartbeatInterval(TimeSpan.FromSeconds(30)).DisableTls();
-
-            //var connection =
-            //    EventStoreConnection.Create(connectionString: configuration.GetConnectionString("EventStore"), connectionSettings);
+            var connectionSettings = ConnectionSettings.Create();
+            connectionSettings.EnableVerboseLogging()
+                .UseDebugLogger()
+                .UseConsoleLogger()
+                .SetHeartbeatTimeout(TimeSpan.FromSeconds(60))
+                .SetHeartbeatInterval(TimeSpan.FromSeconds(30)).DisableTls();
 
             var connection =
-                EventStoreConnection.Create(connectionString: configuration.GetConnectionString("EventStore"));
+                EventStoreConnection.Create(connectionString: configuration.GetConnectionString("EventStore"), connectionSettings);
+
+            // var connection =
+            //     EventStoreConnection.Create(connectionString: configuration.GetConnectionString("EventStore"));
 
             connection.ConnectAsync().Wait();
 

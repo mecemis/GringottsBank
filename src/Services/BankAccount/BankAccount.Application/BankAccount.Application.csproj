@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="BackgroundServices\BankAccountReadModelEventStore.cs" />
+    <Compile Include="BackgroundServices\BankAccountReadModelEventStore.cs" />
+    <Compile Include="BackgroundServices\BankAccountReadModelEventStore.cs" />
     <Compile Remove="BackgroundServices\**" />
-    <Compile Remove="EventStores\**" />
-    <EmbeddedResource Remove="BackgroundServices\**" />
-    <EmbeddedResource Remove="EventStores\**" />
-    <None Remove="BackgroundServices\**" />
-    <None Remove="EventStores\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +35,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\GringottsBank.Shared\GringottsBank.Shared.csproj" />
     <ProjectReference Include="..\BankAccount.Domain\BankAccount.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="BackgroundServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BackgroundServices\**" />
   </ItemGroup>
 
 </Project>

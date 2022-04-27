@@ -38,9 +38,9 @@ namespace BankAccount.API.BackgroundServices
         {
 
 
-            //await _eventStoreConnection.CreatePersistentSubscriptionAsync(BankAccountStream.StreamName,
-            //    BankAccountStream.GroupName, PersistentSubscriptionSettings.Create()
-            //        .StartFromBeginning().MinimumCheckPointCountOf(1).MaximumCheckPointCountOf(10).WithMaxSubscriberCountOf(10), new UserCredentials(_options.Value.Username, _options.Value.Password));
+            // await _eventStoreConnection.CreatePersistentSubscriptionAsync(BankAccountStream.StreamName,
+            //     BankAccountStream.GroupName, PersistentSubscriptionSettings.Create()
+            //         .StartFromBeginning().MinimumCheckPointCountOf(1).MaximumCheckPointCountOf(10).WithMaxSubscriberCountOf(10), new UserCredentials(_options.Value.Username, _options.Value.Password));
 
             await _eventStoreConnection.ConnectToPersistentSubscriptionAsync(BankAccountStream.StreamName,
                 BankAccountStream.GroupName, EventAppeared, autoAck: false);

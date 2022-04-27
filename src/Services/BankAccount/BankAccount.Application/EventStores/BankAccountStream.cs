@@ -5,8 +5,8 @@ namespace BankAccount.Application.EventStores
 {
     public class BankAccountStream : AbstractStream
     {
-        public const string StreamName = "BankAccountStream3";
-        public const string GroupName = "group1";
+        public const string StreamName = "BankAccountStream2";
+        public const string GroupName = "group2";
 
         public BankAccountStream(IEventStoreConnection eventStoreConnection) : base(eventStoreConnection,
             StreamName)

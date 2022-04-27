@@ -1,5 +1,7 @@
+using BankAccount.API.BackgroundServices;
 using BankAccount.Application;
 using BankAccount.Application.Common.Settings;
+using BankAccount.Application.EventStores;
 using BankAccount.Infrastructure;
 using GringottsBank.Shared.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +29,7 @@ namespace BankAccount.API
         {
             services.AddHttpContextAccessor();
             services.AddApplicationServices();
-            //services.AddEventStore(Configuration);
+            services.AddEventStore(Configuration);
             services.AddInfrastructureServices(Configuration);
 
             services.AddAuthentication("Bearer")
@@ -54,7 +56,7 @@ namespace BankAccount.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankAccount.API", Version = "v1" });
             });
 
-            //services.AddHostedService<BankAccountReadModelEventStore>();
+            services.AddHostedService<BankAccountReadModelEventStore>();
             services.Configure<EventStoreSettings>(Configuration.GetSection("Settings:EventStore"));
         }
 
